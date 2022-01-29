@@ -8,17 +8,17 @@
 </head>
 
 <body>
-    <div class="topo">
-        <div class="logo">
-            <img src="/assets/img/logo.png">
-        </div>
-
-        <div class="menu">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="cadastrar.php">Cadastrar Produto</a></li>
-            </ul>
-        </div>
+<div class="topo">
+    <div class="logo">
+        <img src="/assets/img/logo.png">
     </div>
 
-    <div class="conteudo-pagina">
+    <div class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="cadastrar.php">Adicionar produto</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="conteudo-pagina">
