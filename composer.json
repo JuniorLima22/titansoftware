@@ -1,0 +1,11 @@
+{
+    "name": "titansoftware/produtos",
+    "type": "project",
+    "description": "Teste de Projeto em PHP - Titan Software",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
