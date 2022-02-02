@@ -10,10 +10,10 @@
         <?php endif; ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="text" name="nome" value="<?= (!empty($nome)) ? $nome : '' ?>" placeholder="Nome do produto" class="borda-preta">
-            <?php if(!empty($nomeErro)): ?>
+            <?php if($validate->hasErro('nome', $validate->errorsFields)): ?>
                 <div class="alert">
                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                    <?= $nomeErro ?>
+                    <?= $validate->errorMessage('nome', $validate->errorsFields) ?>
                 </div>
             <?php endif; ?>
             <br>
@@ -24,19 +24,19 @@
                 <option value="azul" <?= (!empty($cor) AND $cor == 'azul') ? 'selected' : '' ?>>Azul</option>
                 <option value="vermelho" <?= (!empty($cor) AND $cor == 'vermelho') ? 'selected' : '' ?>>Vermelho</option>
             </select>
-            <?php if(!empty($corErro)): ?>
+            <?php if($validate->hasErro('cor', $validate->errorsFields)): ?>
                 <div class="alert">
                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                    <?= $corErro ?>
+                    <?= $validate->errorMessage('cor', $validate->errorsFields) ?>
                 </div>
             <?php endif; ?>
             <br>
 
-            <input type="number" name="preco" min="0" step="0.01" value="<?= (!empty($preco)) ? $preco : '' ?>" placeholder="Preço do produto" class="borda-preta">
-            <?php if(!empty($precoErro)): ?>
+            <input type="number" name="preco" min="0" max="999999" step="0.01" value="<?= (!empty($preco)) ? $preco : '' ?>" placeholder="Preço do produto" class="borda-preta">
+            <?php if($validate->hasErro('preco', $validate->errorsFields)): ?>
                 <div class="alert">
                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                    <?= $precoErro ?>
+                    <?= $validate->errorMessage('preco', $validate->errorsFields) ?>
                 </div>
                 <?php endif; ?>
             <br>

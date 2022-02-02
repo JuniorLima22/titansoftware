@@ -47,7 +47,7 @@ class Database
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         } catch (PDOException $e) {
-            die('Error: '. $e->getMessage());
+            die('Error Connect: '. $e->getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ class Database
             $statement->execute($params);
             return $statement;
         } catch (PDOException $e) {
-            die('Error: '. $e->getMessage());
+            die('Error Execute: '. $e->getMessage());
         }
     }
 

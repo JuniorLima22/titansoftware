@@ -3,15 +3,40 @@
 require __DIR__.'/vendor/autoload.php';
 
 use App\Entity\Produto;
+use App\Helpers\Validate;
+
+$validate = new Validate();
 
 if (isset($_POST['nome'],$_POST['cor'],$_POST['preco'])) {
-    include __DIR__.'/includes/helpers/validate.php';
 
-    $obProduto = new Produto;
-    $obProduto->nome = $nome;
-    $obProduto->cor = $cor;
-    $obProduto->preco = $preco;
-    $obProduto->cadastrar();
+    $validate->validate([
+        'nome' => ['max:40', 'min:3', 'required'],
+        'cor' => ['exists:amarelo,azul,vermelho', 'required'],
+        'preco' => ['numeric', 'required'],
+    ]);
+    
+    for ($i=0; $i < count($validate->fields); $i++) {
+
+        if (array_keys($validate->fields[$i])[0] == 'nome') {
+            $nome = $validate->fields[$i]['nome'];
+        }
+
+        if (array_keys($validate->fields[$i])[0] == 'cor') {
+            $cor = $validate->fields[$i]['cor'];
+        }
+
+        if (array_keys($validate->fields[$i])[0] == 'preco') {
+            $preco = $validate->fields[$i]['preco'];
+        }
+    }
+
+    if (count($validate->errorsFields) == 0) {
+        $obProduto = new Produto;
+        $obProduto->nome = $nome;
+        $obProduto->cor = $cor;
+        $obProduto->preco = $preco;
+        $obProduto->cadastrar();
+    }
 }
 
 include __DIR__.'/includes/header.php';
