@@ -67,6 +67,20 @@ class Produto
     }
 
     /**
+     * Método responsavel por deletar produto no banco
+     *
+     * @return Boolean
+     **/
+    public function excluir()
+    {
+        (new Database('precos'))->delete('id_preco = '. $this->id_preco);
+
+        (new Database('produtos'))->delete('id_prod = '. $this->id_prod);
+
+        return true;
+    }
+
+    /**
      * Método responsavel por listar produtos do banco de dados
      *
      * @param String $join

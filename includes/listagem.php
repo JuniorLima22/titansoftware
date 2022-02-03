@@ -30,10 +30,12 @@
                             <td><?= $produto->id_prod ?></td>
                             <td><?= $produto->nome ?></td>
                             <td><?= ucfirst($produto->cor) ?></td>
-                            <td><?= $produto->preco ?></td>
+                            <td><?= 'R$ '. number_format($produto->preco, 2, ',','.') ?></td>
                             <td>Desconto</td>
                             <td><button onclick="location.href='editar.php?id=<?=$produto->id_prod?>'" class="info  borda-branca">Editar</button></td>
-                            <form action="deletar.php?id=<?=$produto->id_prod?>" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
+                            <form action="excluir.php" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
+                            <input type="hidden" name="id" value="<?=$produto->id_prod?>">
+                            <input type="hidden" name="excluir" value="true">
                             <td>
                                 <button class="texto-branco danger borda-branca">Excluir</button>
                             </td>

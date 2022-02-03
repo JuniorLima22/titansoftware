@@ -106,6 +106,21 @@ class Database
     }
 
     /**
+     * Método responsavel por deletar dados no banco de dados
+     *
+     * @param String $where
+     * @return Boolean
+     **/
+    public function delete($where)
+    {
+        $query = 'DELETE FROM '. $this->table. ' WHERE '. $where;
+
+        $this->execute($query);
+
+        return true;
+    }
+
+    /**
      * Método responsavel por executar uma consulta no banco de dados
      *
      * @param String $join
