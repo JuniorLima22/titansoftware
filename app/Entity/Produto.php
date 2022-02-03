@@ -48,17 +48,49 @@ class Produto
     }
 
     /**
+     * Método responsavel por atualizar produto no banco
+     *
+     * @return Boolean
+     **/
+    public function atualizar()
+    {
+        (new Database('produtos'))->update('id_prod = '. $this->id_prod, [
+            'nome' => $this->nome,
+            'cor' => $this->cor,
+        ]);
+
+        (new Database('precos'))->update('id_preco = '. $this->id_preco, [
+            'preco' => $this->preco,
+        ]);
+
+        return true;
+    }
+
+    /**
      * Método responsavel por listar produtos do banco de dados
      *
+     * @param String $join
      * @param String $where
      * @param String $order
      * @param String $limit
      * @return Array
      **/
-    public static function getProdutos($where = null, $order = null, $limit = null)
+    public static function getProdutos($join = null, $where = null, $order = null, $limit = null)
     {
-        return (new Database('produtos'))->select($where, $order, $limit)
-                                        ->fetchAll(PDO::FETCH_CLASS, self::class);
+        return (new Database('produtos'))->select($join, $where, $order, $limit)
+                                         ->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
+
+    /**
+     * Método responsavel por buscar um produto com base em seu ID
+     *
+     * @param Integer $id
+     * @return Produto
+     **/
+    public static function getProduto($id)
+    {
+        return (new Database('produtos'))->select('LEFT JOIN precos ON precos.prod_id=produtos.id_prod', 'id_prod = '. $id)
+                                         ->fetchObject(self::class);
     }
 }
 

@@ -72,7 +72,7 @@ class Database
     /**
      * Método responsavelpor inserir dados no banco de dados
      *
-     * @param Araay $calues [field => value]
+     * @param Array $values [field => value]
      * @return Integer ID inserido
      **/
     public function insert($values)
@@ -88,21 +88,41 @@ class Database
     }
 
     /**
+     * Método responsavel por atualizar dados no banco de dados
+     *
+     * @param String $where
+     * @param Array $values [field => value]
+     * @return Boolean
+     **/
+    public function update($where, $values)
+    {
+        $fields = array_keys($values);
+        
+        $query = 'UPDATE '. $this->table .' SET '. implode('=?,', $fields) .'=? WHERE '. $where;
+        
+        $this->execute($query, array_values($values));
+
+        return true;
+    }
+
+    /**
      * Método responsavel por executar uma consulta no banco de dados
      *
+     * @param String $join
      * @param String $where
      * @param String $order
      * @param String $limit
      * @param String $fields
      * @return PDOStatement
      **/
-    public function select($where = null, $order = null, $limit = null, $fields = '*')
+    public function select($join = null, $where = null, $order = null, $limit = null, $fields = '*')
     {
+        $join = strlen($join) ? $join : '';
         $where = strlen($where) ? 'WHERE '. $where : '';
         $order = strlen($order) ? 'ORDER BY '. $order : '';
         $limit = strlen($limit) ? 'LIMIT '. $limit : '';
 
-        $query = 'SELECT '. $fields. ' FROM '. $this->table. ' '. $where. ' '. $order. ' '. $limit;
+        $query = 'SELECT '. $fields. ' FROM '. $this->table. ' '. $join. ' '. $where. ' '. $order. ' '. $limit;
 
         return $this->execute($query);
     }
