@@ -1,10 +1,13 @@
 <?php
+session_start();
 
 require __DIR__.'/vendor/autoload.php';
 
+use App\Helpers\Session;
 use App\Entity\Produto;
 use App\Helpers\Validate;
 
+$session = new Session();
 $validate = new Validate();
 
 /** Validação do ID */
@@ -16,9 +19,6 @@ if (!isset($_POST['id']) OR !is_numeric($_POST['id'])) {
 /** Consultar Produto */
 $obProduto = Produto::getProduto($_POST['id']);
 
-var_dump($obProduto);
-echo '<br>';
-
 /** Validação se Produto existe */
 if (!$obProduto instanceof Produto) {
     header('Location: index.php?status=error');
@@ -27,8 +27,14 @@ if (!$obProduto instanceof Produto) {
 
 if (isset($_POST['excluir'])) {
 
-    $obProduto->excluir();
+    if ($obProduto->excluir()) {
+        $session->flash('message', 'Produto excluido com sucesso.');
+        $session->flash('type', 'success');
 
-    header('Location: index.php?status=success');
-    exit;
+        header('Location: index.php'); exit;
+    }
+
+    $session->flash('message', 'Erro ao excluir produto.');
+
+    header('Location: index.php'); exit;
 }
