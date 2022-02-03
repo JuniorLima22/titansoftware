@@ -1,12 +1,15 @@
 <?php
+session_start();
 
 require __DIR__.'/vendor/autoload.php';
 
 define('TITLE', 'Editar Produto');
 
+use App\Helpers\Session;
 use App\Entity\Produto;
 use App\Helpers\Validate;
 
+$session = new Session();
 $validate = new Validate();
 
 /** Validação do ID */
@@ -58,7 +61,15 @@ if (isset($_POST['nome'],$_POST['preco'])) {
         $obProduto->cor = $cor;
         $obProduto->id_preco = $id_preco;
         $obProduto->preco = $preco;
-        $obProduto->atualizar();
+
+        if ($obProduto->atualizar()) {
+            $session->flash('message', 'Produto atualizado com sucesso.');
+            $session->flash('type', 'success');
+
+            header('Location: index.php'); exit;
+        }
+
+        $session->flash('message', 'Erro ao atualizar produto.');
     }
 }
 

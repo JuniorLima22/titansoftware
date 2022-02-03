@@ -2,10 +2,10 @@
 
 <div class="informacao-pagina">
     <div style="width: 30%; margin-left: auto; margin-right: auto;">
-        <?php if(!empty($mensagem)): ?>
-            <div class="alert <?php if(!empty($tipo)) echo $tipo ?>">
+        <?php if($session->has('message')): ?>
+            <div class="alert <?php if($session->has('type')) echo $session->get('type') ?>">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-                    <?= $mensagem ?>
+                    <?= $session->get('message') ?>
             </div>
         <?php endif; ?>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">

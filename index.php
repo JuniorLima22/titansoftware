@@ -1,8 +1,12 @@
 <?php
+session_start();
 
 require __DIR__.'/vendor/autoload.php';
 
-use \App\Entity\Produto;
+use App\Helpers\Session;
+use App\Entity\Produto;
+
+$session = new Session();
 
 $produtos = Produto::getProdutos('LEFT JOIN precos ON precos.prod_id=produtos.id_prod');
 

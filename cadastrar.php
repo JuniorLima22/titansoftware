@@ -1,12 +1,15 @@
 <?php
+session_start();
 
 require __DIR__.'/vendor/autoload.php';
 
 define('TITLE', 'Cadastrar Produto');
 
+use App\Helpers\Session;
 use App\Entity\Produto;
 use App\Helpers\Validate;
 
+$session = new Session();
 $validate = new Validate();
 
 if (isset($_POST['nome'],$_POST['cor'],$_POST['preco'])) {
@@ -37,7 +40,15 @@ if (isset($_POST['nome'],$_POST['cor'],$_POST['preco'])) {
         $obProduto->nome = $nome;
         $obProduto->cor = $cor;
         $obProduto->preco = $preco;
-        $obProduto->cadastrar();
+        
+        if ($obProduto->cadastrar()) {
+            $session->flash('message', 'Produto cadastrado com sucesso.');
+            $session->flash('type', 'success');
+
+            header('Location: index.php'); exit;
+        }
+
+        $session->flash('message', 'Erro ao cadastrar produto.');
     }
 }
 
