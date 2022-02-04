@@ -41,7 +41,8 @@
                     <td>Nome</td>
                     <td>Cor</td>
                     <td>Preço</td>
-                    <td>Preço com desconto</td>
+                    <td>%</td>
+                    <td>Desconto</td>
                     <td colspan="3">Ações</td>
                 </tr>
             </thead>
@@ -57,7 +58,15 @@
                             <td><?= $produto->nome ?></td>
                             <td><?= ucfirst($produto->cor) ?></td>
                             <td><?= 'R$ '. number_format($produto->preco, 2, ',','.') ?></td>
-                            <td>Desconto</td>
+                            <td>
+                                <?php
+                                    $desconto = desconto($produto->cor, $produto->preco);
+                                    echo '-'. $desconto['porcentagem']. '% ';
+                                ?>
+                            </td>
+                            <td>
+                                <?= 'R$ '. number_format($desconto['total'], 2, ',','.'); ?>
+                            </td>
                             <td><button onclick="location.href='editar.php?id=<?=$produto->id_prod?>'" class="info  borda-branca">Editar</button></td>
                             <form action="excluir.php" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
                             <input type="hidden" name="id" value="<?=$produto->id_prod?>">

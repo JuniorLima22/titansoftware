@@ -2,6 +2,7 @@
 session_start();
 
 require __DIR__.'/vendor/autoload.php';
+include __DIR__.'/includes/desconto.php';
 
 use App\Helpers\Session;
 use App\Entity\Produto;
