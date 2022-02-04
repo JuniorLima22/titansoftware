@@ -131,14 +131,12 @@ button:hover {
 
 .esquerda {
     float:left;
-    background-color: #268fd0;
     width: 60%;
     height: 100%;
 }
 
 .direita {
     float:right;
-    background-color: #2a9ee2;
     width: 40%;
     height: 100%;
 }

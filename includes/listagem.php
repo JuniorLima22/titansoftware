@@ -1,9 +1,35 @@
 <div class="titulo-pagina-2"><p>Listagems de Produtos</p></div>
 
 <div class="informacao-pagina">
+    <div style="width: 40%; margin-left: auto; margin-right: auto; margin-bottom: 0px;">
+        <form method="get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <input type="text" name="nome" value="<?php if(!empty($nome)) echo $nome; ?>" placeholder="Nome do produto" class="borda-preta">
+
+        <select name="cor" class="borda-preta">
+            <option value="">-- Selecione uma cor --</option>
+            <option value="amarelo"  <?php if(!empty($cor) && $cor == 'amarelo') echo 'selected' ?> >Amarelo</option>
+            <option value="azul"     <?php if(!empty($cor) && $cor == 'azul') echo 'selected' ?> >Azul</option>
+            <option value="vermelho" <?php if(!empty($cor) && $cor == 'vermelho') echo 'selected' ?>>Vermelho</option>
+        </select>
+        
+        <input type="number" name="preco" min="0" max="999999" step="0.01" value="<?php if(!empty($preco)) echo $preco; elseif(!empty($obProduto->preco)) echo $obProduto->preco;  ?>" placeholder="Preço do produto" class="borda-preta esquerda" style="width: 55%;">
+
+        <select name="sinal" class="borda-preta direita" style="margin-left: 0px;">
+            <option value="">-- Selecione um sinal --</option>
+            <option value="=" <?php if(!empty($sinal) && $sinal == '=') echo 'selected' ?> >Igual</option>
+            <option value=">" <?php if(!empty($sinal) && $sinal == '>') echo 'selected' ?> >Maior</option>
+            <option value="<" <?php if(!empty($sinal) && $sinal == '<') echo 'selected' ?> >Menor</option>
+        </select>
+        
+        <button class="borda-preta texto-branco">Filtrar</button>
+        </form>
+    </div>
+</div>
+
+<div class="informacao-pagina">
     <div style="width: 90%; margin-left: auto; margin-right: auto;">
         <?php if($session->has('message')): ?>
-            <div class="alert <?php if($session->has('type')) echo $session->get('type') ?>">
+            <div class="alert <?php if($session->has('type')) echo $session->get('type') ?>" style="margin-top: 20px; margin-bottom: 20px;">
                 <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
                     <?= $session->get('message') ?>
             </div>
