@@ -42,19 +42,22 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 
 ### 👨🏻‍💻 Rodando o Back End
 
-```bash
-# Clone este repositório
-$ git clone https://github.com/JuniorLima22/titansoftware.git
-```
+#### Clone este repositório
 
 ```bash
-# Acesse a pasta do projeto no terminal/cmd
-$ cd titansoftware
+git clone https://github.com/JuniorLima22/titansoftware.git
 ```
 
+#### Acesse a pasta do projeto no terminal/cmd
+
 ```bash
-# Instale o autoload
-$ composer install
+cd titansoftware
+```
+
+#### Instale o autoload
+
+```bash
+composer install
 ```
 
 ### 💾 Rodando o Banco de Dados
@@ -109,5 +112,5 @@ Tempo gasto no IDE para este repositório, rastreado automaticamente com [wakati
 > Made with 💙 by JUNIOR LIMA 👋 <a href="https://www.linkedin.com/in/JuniorLima22/" target="_blank">See my LinkedIn</a> • GitHub <a href="https://github.com/JuniorLima22" target="_blank">@JuniorLima22</a>
 
 <p align="center">
-<sub><a href="#top" align="center">voltar para o topo ↑</a></sub>
+<sub><a href="#top" align="center">↑ voltar para o topo ↑</a></sub>
 </p>
